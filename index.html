@@ -97,15 +97,12 @@
         }
 
         /* --- Voxel Dog Container Styles (ฉบับแก้ไข) --- */
-
-        /* Keyframes สำหรับท่าหมุนของ Spinner */
         @keyframes spin {
             to {
                 transform: rotate(360deg);
             }
         }
 
-        /* สไตล์ของ Spinner ที่จะแสดงตอนโหลด */
         .loader-spinner {
             display: block;
             width: 48px;
@@ -127,30 +124,23 @@
             position: relative;
             margin-bottom: 1.5rem;
             width: 200px;
-            /* เล็กลงอีก */
             height: 200px;
-            /* เล็กลงอีก */
         }
 
         @media (min-width: 768px) {
             .voxel-dog-container {
                 width: 300px;
-                /* เล็กลงอีก */
                 height: 300px;
-                /* เล็กลงอีก */
             }
         }
 
         @media (min-width: 992px) {
             .voxel-dog-container {
                 width: 400px;
-                /* เล็กลงอีก */
                 height: 400px;
-                /* เล็กลงอีก */
             }
         }
 
-        /* ทำให้ model-viewer ขยายเต็มกล่อง container */
         .voxel-dog-container model-viewer {
             width: 100%;
             height: 100%;
@@ -189,6 +179,13 @@
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.8);
             object-fit: cover;
+            transition: box-shadow 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
+        }
+        
+        /* --- 🟢 CSS ที่เพิ่มเข้ามา: Hover Effect --- */
+        .profile-image:hover {
+            cursor: pointer;
+            box-shadow: 0 0 15px 4px #48bb78; /* เงาสีเขียวรอบรูป */
         }
 
         h1,
@@ -322,6 +319,54 @@
             margin-right: 0.5rem;
             fill: currentColor;
         }
+        
+        /* --- 🟢 CSS ที่เพิ่มเข้ามา: Modal Styles --- */
+        .modal {
+            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
+            position: fixed; 
+            z-index: 20; 
+            padding-top: 100px; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgba(0,0,0,0.9); /* พื้นหลังสีดำโปร่งแสง */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 50%; /* ทำให้รูปเป็นวงกลม */
+            border: 5px solid var(--bg-color); /* ขอบสีขาวรอบรูป */
+            animation-name: zoom;
+            animation-duration: 0.5s;
+        }
+        
+        @keyframes zoom {
+            from {transform: scale(0)}
+            to {transform: scale(1)}
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
@@ -337,6 +382,9 @@
 
             .nav-links a {
                 display: none;
+            }
+            .modal-content {
+                width: 90%;
             }
         }
     </style>
@@ -371,7 +419,7 @@
                 <p class="page-subtitle">Computer Science Graduate / Developer</p>
             </div>
             <div class="profile-image-box">
-                <img src="images/profile.jpg" alt="Profile image" class="profile-image">
+                <img src="images/profile.jpg" alt="Profile image" class="profile-image" id="profileImage">
             </div>
         </div>
 
@@ -514,6 +562,12 @@
 
     </main>
 
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+
     <script>
         // --- JavaScript for Theme Toggle ---
         const themeToggleButton = document.getElementById('theme-toggle');
@@ -542,6 +596,32 @@
             setTheme(newTheme);
             localStorage.setItem('theme', newTheme);
         });
+        
+        // --- 🟢 JavaScript ที่เพิ่มเข้ามา: Image Modal ---
+        // 1. ดึง element ที่ต้องใช้มาเก็บในตัวแปร
+        var modal = document.getElementById("imageModal");
+        var img = document.getElementById("profileImage");
+        var modalImg = document.getElementById("modalImage");
+        var span = document.getElementsByClassName("close")[0];
+
+        // 2. เมื่อคลิกที่รูปโปรไฟล์
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+
+        // 3. เมื่อคลิกที่ปุ่มปิด (กากบาท)
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // 4. เมื่อคลิกที่พื้นที่อื่นนอก Modal
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
     </script>
 </body>
 
