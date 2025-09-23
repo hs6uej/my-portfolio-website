@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napaphon Gulnaphim - Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+    <style>
+        /* --- CSS Variables for Theming --- */
+        :root {
+            --bg-color: #f0e7db;
+            --text-color: #202023;
+            --heading-color: #333;
+            --link-color: #3d7aed;
+            --accent-color: #319795;
+            /* Teal color */
+            --card-bg-color: rgba(255, 255, 255, 0.5);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --section-title-border: #525252;
+            --font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body.dark-mode {
+            --bg-color: #202023;
+            --text-color: #eee;
+            --heading-color: #eee;
+            --link-color: #88ccff;
+            --accent-color: #81e6d9;
+            /* Lighter Teal for dark mode */
+            --card-bg-color: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --section-title-border: #a0aec0;
+        }
+
+        /* --- General Styles --- */
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* --- Header / Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            color: var(--heading-color);
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .theme-toggle-btn {
+            background-color: #805AD5;
+            /* Purple */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Voxel Dog Container Styles (ฉบับแก้ไข) --- */
+
+        /* Keyframes สำหรับท่าหมุนของ Spinner */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* สไตล์ของ Spinner ที่จะแสดงตอนโหลด */
+        .loader-spinner {
+            display: block;
+            width: 48px;
+            height: 48px;
+            border: 4px solid currentColor;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -24px;
+            margin-left: -24px;
+        }
+
+        .voxel-dog-container {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 200px;
+            /* เล็กลงอีก */
+            height: 200px;
+            /* เล็กลงอีก */
+        }
+
+        @media (min-width: 768px) {
+            .voxel-dog-container {
+                width: 300px;
+                /* เล็กลงอีก */
+                height: 300px;
+                /* เล็กลงอีก */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .voxel-dog-container {
+                width: 400px;
+                /* เล็กลงอีก */
+                height: 400px;
+                /* เล็กลงอีก */
+            }
+        }
+
+        /* ทำให้ model-viewer ขยายเต็มกล่อง container */
+        .voxel-dog-container model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Intro Box --- */
+        .intro-box {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* --- Profile Section --- */
+        .profile-section {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .profile-info {
+            flex-grow: 1;
+        }
+
+        .profile-image-box {
+            flex-shrink: 0;
+            margin-left: 1.5rem;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            object-fit: cover;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--heading-color);
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .page-subtitle {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        /* --- Section Styles --- */
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+            text-decoration-color: var(--section-title-border);
+            text-decoration-thickness: 4px;
+            margin-bottom: 1rem;
+        }
+
+        /* --- List Styles --- */
+        .summary-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .summary-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-list .icon {
+            color: #48bb78;
+            margin-right: 0.75rem;
+            margin-top: 4px;
+        }
+
+        /* --- Button --- */
+        .portfolio-btn-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn .icon-right {
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* --- Bio Section --- */
+        .bio-section {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+
+        .bio-year {
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .bio-section ul {
+            padding-left: 20px;
+            margin-top: 0.25rem;
+        }
+
+        /* --- On the Web Section --- */
+        .social-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .social-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 0.75rem;
+            color: var(--accent-color);
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-weight: 700;
+        }
+
+        .social-btn:hover {
+            background-color: var(--card-bg-color);
+        }
+
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+            fill: currentColor;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+            }
+
+            .profile-image-box {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+            }
+
+            .nav-links a {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="/" class="nav-logo">Napaphon Gulnaphim</a>
+        <div>
+            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle dark mode">🌙</button>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div class="voxel-dog-container">
+            <model-viewer id="dog-model" src="models/dog3.glb" alt="A 3D model" shadow-intensity="1" camera-controls
+                auto-rotate ar camera-target="auto auto 0.5m" camera-orbit="30deg 75deg 38m"
+                min-camera-orbit="auto auto 6m" max-camera-orbit="auto auto 12m" exposure="1.8">
+                <div class="loader-spinner" slot="loading"></div>
+            </model-viewer>
+        </div>
+
+        <div class="intro-box">
+            Hello, I'm a Software Developer based in Thailand!
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-info">
+                <h1 class="page-title">Napaphon Gulnaphim</h1>
+                <p class="page-subtitle">Computer Science Graduate / Developer</p>
+            </div>
+            <div class="profile-image-box">
+                <img src="images/profile.jpg" alt="Profile image" class="profile-image">
+            </div>
+        </div>
+
+        <section class="section">
+            <h3 class="section-title">Summary of Qualification</h3>
+            <ul class="summary-list">
+                <li>
+                    <span class="icon">✅</span>
+                    <span>In-depth understanding of computer systems, software and application operations, with an
+                        ability to analyze and troubleshoot problems.</span>
+                </li>
+                <li>
+                    <span class="icon">✅</span>
+                    <span>Proficient in web development using PHP, JavaScript, and MySQL.</span>
+                </li>
+                <li>
+                    <span class="icon">✅</span>
+                    <span>Strong analytical, problem-solving, and interpersonal skills.</span>
+                </li>
+                <li>
+                    <span class="icon">✅</span>
+                    <span>A detail-oriented, enthusiastic team player, willing to learn new things and able to work well
+                        under pressure.</span>
+                </li>
+            </ul>
+            <div class="portfolio-btn-container">
+                <a href="https://mac.snapz.co/mac/work.html" class="btn">
+                    My Portfolio
+                    <span class="icon-right">›</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Education Background</h3>
+            <div class="bio-section">
+                <span class="bio-year">2017 - 2022</span>
+                <span>
+                    <b>Bachelor of Science in Computer Sciences (GPA 3.31)</b><br>
+                    Pibulsongkram Rajabhat University<br>
+                    <i>Senior Project: Model to Predict the Graduation Characteristics of Undergraduate Student Using
+                        Data Mining Techniques.</i>
+                </span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Internship Experience</h3>
+            <div class="bio-section">
+                <span class="bio-year">2020 - 2021</span>
+                <span>
+                    <b>Trainee, IT-Development Department</b><br>
+                    U Info Co., Ltd.
+                    <ul>
+                        <li>Worked with team members to design algorithms and flowcharts.</li>
+                        <li>Produced clean and efficient code based on specifications.</li>
+                        <li>Analyzed, troubleshooted, and upgraded existing software.</li>
+                        <li>Created technical documentation for reference and reporting.</li>
+                    </ul>
+                </span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Certificates & Training</h3>
+            <div class="bio-section">
+                <span class="bio-year">2021</span>
+                <span>Certified Professional Qualification Level 3 in System Design Analyst from TPQI.</span>
+            </div>
+            <div class="bio-section">
+                <span class="bio-year">2020</span>
+                <span>MikroTik Certified Network Associate (MTCNA).</span>
+            </div>
+            <div class="bio-section">
+                <span class="bio-year">2019</span>
+                <span>IC3 Global Standard 5 Digital Literacy Certification.</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">Awards & Achievements</h3>
+            <div class="bio-section">
+                <span class="bio-year">2022</span>
+                <span>Received an Honorable Award for the senior project at the Outstanding Cooperative Education
+                    Contest.</span>
+            </div>
+            <div class="bio-section">
+                <span class="bio-year">2022</span>
+                <span>Won a Good Presentation Award at the 6th National Conference on Science and Technology
+                    (NCOST).</span>
+            </div>
+            <div class="bio-section">
+                <span class="bio-year">2018</span>
+                <span>Awarded a Medal for Excellent Academic Performance.</span>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">I ♥</h3>
+            <p>Gaming, Rock Music, Data Mining & Machine Learning, Photography</p>
+        </section>
+
+        <section class="section">
+            <h3 class="section-title">On the web</h3>
+            <ul class="social-list">
+                <li>
+                    <a href="https://github.com/macsality" target="_blank" class="social-btn">
+                        <svg viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                        @macsality
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/macsality" target="_blank" class="social-btn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <g>
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                                </path>
+                            </g>
+                        </svg>
+                        @macsality
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/Macsality" target="_blank" class="social-btn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-1.5c-1.38 0-1.5.62-1.5 1.4V12h3l-.5 3h-2.5v6.8c4.56-.93 8-4.96 8-9.8z">
+                            </path>
+                        </svg>
+                        @Macsality
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <script>
+        // --- JavaScript for Theme Toggle ---
+        const themeToggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        const setTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggleButton.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-mode');
+                themeToggleButton.textContent = '🌙';
+            }
+        };
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setTheme(prefersDark ? 'dark' : 'light');
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+            setTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+
+</html>
