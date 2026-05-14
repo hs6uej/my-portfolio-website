@@ -7,256 +7,361 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CSS Variables for Theming (Consistent with index.html) --- */
+        /* --- CSS Variables for Theming --- */
         :root {
-            --bg-color: #f0e7db;
-            --text-color: #202023;
-            --heading-color: #333;
-            --link-color: #3d7aed;
-            --accent-color: #319795;
-            --card-bg-color: rgba(255, 255, 255, 0.5);
-            --border-color: rgba(0, 0, 0, 0.1);
-            --section-title-border: #525252;
-            --font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --bg-color: #fafafa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --accent-primary: #0066cc;
+            --accent-secondary: #00b8a9;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         body.dark-mode {
-            --bg-color: #202023;
-            --text-color: #eee;
-            --heading-color: #eee;
-            --link-color: #88ccff;
-            --accent-color: #81e6d9;
-            --card-bg-color: rgba(255, 255, 255, 0.08);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --section-title-border: #a0aec0;
+            --bg-color: #0f0f0f;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #6db3ff;
+            --accent-secondary: #4dd9d0;
+            --card-bg: #1a1a1a;
+            --border-color: #2a2a2a;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
 
-        /* --- General Styles --- */
-        body {
-            font-family: var(--font-family);
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        * {
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            box-sizing: border-box;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem;
+        body {
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+            font-weight: 400;
         }
-        
+
         /* --- Header / Navbar --- */
         .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 2rem;
+        }
+
+        body.dark-mode .navbar {
+            background-color: rgba(15, 15, 15, 0.8);
+        }
+
+        .navbar-content {
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .nav-logo {
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-decoration: none;
-            color: var(--heading-color);
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
         }
 
         .controls-container {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.8rem;
         }
         
         .theme-toggle-btn, .lang-toggle-btn {
-            background-color: #805AD5;
+            background-color: var(--accent-primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 0.5rem;
+            border-radius: 6px;
+            padding: 0.6rem 0.8rem;
             cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 40px;
-        }
-        .lang-toggle-btn {
-            background-color: #4A5568;
-            font-size: 1rem;
-            font-weight: bold;
-            padding: 0.5rem 0.75rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
-        /* --- Page Title --- */
+        .theme-toggle-btn:hover, .lang-toggle-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        /* --- Container --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
         .page-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--heading-color);
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-         .page-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            color: var(--text-color);
-        }
-
-
-        /* --- Work Item Styles --- */
-        .work-item {
-            background-color: var(--card-bg-color);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .work-item h3 {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-            margin-top: 0;
-            margin-bottom: 1rem;
-        }
-
-        .work-item p, .work-item ul {
-            margin-bottom: 1rem;
-        }
-
-        .work-item ul {
-            padding-left: 20px;
-        }
-        
-        .work-item ul li {
+            font-family: 'Crimson Text', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            line-height: 1.2;
         }
 
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 0.2rem;
         }
 
-        .tag {
-            background-color: var(--accent-color);
+        .role-badge {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-secondary);
             color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
+            border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
         }
 
-        .work-image {
-            width: 100%;
+        /* --- Section Styling --- */
+        .work-item {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .work-item:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        .work-item h3 {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .work-item p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .work-item strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* --- List Styling --- */
+        .work-item ul {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .work-item li {
+            margin-bottom: 0.9rem;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .work-item li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* --- Tags --- */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tag {
+            background-color: var(--accent-primary);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         /* --- Button --- */
         .back-btn-container {
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
         
         .btn {
             display: inline-flex;
             align-items: center;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--accent-color);
+            padding: 0.9rem 1.8rem;
+            background-color: var(--accent-primary);
             color: white;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.2s;
+            font-size: 1rem;
         }
 
         .btn:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .work-item {
+                padding: 1.8rem;
+            }
+
+            .work-item h3 {
+                font-size: 1.4rem;
+            }
+
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-logo {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <header class="navbar">
-        <a href="/" class="nav-logo">Napaphon Gulnaphim</a>
-        <div class="controls-container">
-             <button id="lang-toggle" class="lang-toggle-btn">TH</button>
-            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle dark mode">🌙</button>
+        <div class="navbar-content">
+            <a href="/" class="nav-logo" data-lang-en="Napaphon Gulnaphim" data-lang-th="นภาพร กุลนาภิม">Napaphon Gulnaphim</a>
+            <div class="controls-container">
+                <button id="lang-toggle" class="lang-toggle-btn" title="ภาษา">TH</button>
+                <button id="theme-toggle" class="theme-toggle-btn" title="Dark mode">🌙</button>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <h1 class="page-title" data-lang-en="My Portfolio" data-lang-th="ผลงานของฉัน">My Portfolio</h1>
-        <p class="page-subtitle" data-lang-en="System Analyst at SUN SYSTEM CORPORATION LTD." data-lang-th="System Analyst ที่ SUN SYSTEM CORPORATION LTD.">System Analyst at SUN SYSTEM CORPORATION LTD.</p>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1 class="page-title" data-lang-en="My Portfolio" data-lang-th="ผลงานของฉัน">My Portfolio</h1>
+            <p class="page-subtitle" data-lang-en="System Analyst" data-lang-th="System Analyst">System Analyst</p>
+            <div class="role-badge" data-lang-en="SUN SYSTEM CORPORATION LTD." data-lang-th="SUN SYSTEM CORPORATION LTD.">SUN SYSTEM CORPORATION LTD.</div>
+        </div>
 
-        <!-- AIS Chatbot Callflow Project -->
+        <!-- AIS Chatbot Project -->
         <div class="work-item">
             <h3 data-lang-en="AIS Chatbot Callflow Project" data-lang-th="โปรเจกต์ AIS Chatbot Callflow">AIS Chatbot Callflow Project</h3>
-            <p data-lang-en="As a key project, I was responsible for developing the Callflow management system for the AIS Chatbot. This involved using the Genie Dialog Design tool to create conversation flows and managing the entire project through Azure DevOps." data-lang-th="เป็นหนึ่งในโปรเจกต์หลักที่รับผิดชอบในการพัฒนาระบบจัดการ Callflow สำหรับ Chatbot ของ AIS โดยใช้เครื่องมือ Genie Dialog Design ในการออกแบบ Flow การสนทนา และบริหารจัดการโปรเจกต์ทั้งหมดผ่าน Azure DevOps.">
-                As a key project, I was responsible for developing the Callflow management system for the AIS Chatbot. This involved using the Genie Dialog Design tool to create conversation flows and managing the entire project through Azure DevOps.
+            
+            <p data-lang-en="Led the development of a comprehensive Callflow management system for AIS's chatbot platform. This project involved designing conversation flows that guide customers through various service inquiries, from bill inquiries to service cancellations. I utilized Genie Dialog Design Tool to create intuitive conversation paths and orchestrated the entire project using Azure DevOps." data-lang-th="นำทีมในการพัฒนาระบบจัดการ Callflow ครอบคลุมสำหรับแพลตฟอร์ม chatbot ของ AIS โดยออกแบบเส้นทางการสนทนาที่นำลูกค้าผ่านการสอบถามต่างๆ ตั้งแต่การตรวจสอบบิลไปจนถึงการยกเลิกบริการ โดยใช้เครื่องมือ Genie Dialog Design และบริหารโปรเจกต์ผ่าน Azure DevOps">
+                Led the development of a comprehensive Callflow management system for AIS's chatbot platform. This project involved designing conversation flows that guide customers through various service inquiries, from bill inquiries to service cancellations. I utilized Genie Dialog Design Tool to create intuitive conversation paths and orchestrated the entire project using Azure DevOps.
             </p>
-             <!-- <img src="https://storage.googleapis.com/gemini-prod/images/image_e63ccc.png" alt="Genie Dialog Design for AIS" class="work-image"> -->
-            <p data-lang-en="The system was divided into multiple repositories for ease of development and maintenance, including Web Admin, a Static Web App, and the core Engine. Version control and the CI/CD pipeline for all components were managed via Azure DevOps." data-lang-th="ระบบถูกแบ่งออกเป็นหลายส่วน (repository) เพื่อความสะดวกในการพัฒนาและดูแลรักษา เช่น Web Admin, Static Web App, และส่วนของ Engine หลัก ทั้งหมดนี้ถูกควบคุมเวอร์ชันและจัดการ CI/CD Pipeline ผ่าน Azure DevOps.">
-                The system was divided into multiple repositories for ease of development and maintenance, including Web Admin, a Static Web App, and the core Engine. Version control and the CI/CD pipeline for all components were managed via Azure DevOps.
+
+            <p data-lang-en="<strong>Architecture & Structure:</strong> The system was organized into multiple repositories for better maintainability—Web Admin portal for configuration, Static Web App for user-facing interface, and Core Engine for processing logic. All components were managed through Azure DevOps with automated CI/CD pipelines to ensure quality and rapid deployment." data-lang-th="<strong>สถาปัตยกรรม:</strong> ระบบถูกจัดระเบียบเป็นหลายส่วน (repositories) เพื่อให้บำรุงรักษาได้ง่าย—Web Admin สำหรับตั้งค่า, Static Web App สำหรับอินเทอร์เฟซ, และ Core Engine สำหรับโลจิก ทั้งหมดจัดการผ่าน Azure DevOps พร้อม CI/CD automation">
+                <strong>Architecture & Structure:</strong> The system was organized into multiple repositories for better maintainability—Web Admin portal for configuration, Static Web App for user-facing interface, and Core Engine for processing logic. All components were managed through Azure DevOps with automated CI/CD pipelines to ensure quality and rapid deployment.
             </p>
-            <!-- <img src="https://storage.googleapis.com/gemini-prod/images/image_e640e5.png" alt="Azure DevOps Projects for AIS Chatbot" class="work-image"> -->
-            <!-- <img src="https://storage.googleapis.com/gemini-prod/images/image_e63d84.png" alt="AIS ChatCallFlow Project Overview on Azure DevOps" class="work-image"> -->
+
             <div class="tags">
                 <span class="tag">Azure DevOps</span>
                 <span class="tag">Chatbot</span>
                 <span class="tag">Callflow</span>
-                <span class="tag">CI/CD</span>
+                <span class="tag">CI/CD Pipeline</span>
                 <span class="tag">Genie Dialog Design</span>
-                <span class="tag">Project Management</span>
             </div>
         </div>
 
-        <!-- Project Management & Quality Standards -->
+        <!-- Project Management -->
         <div class="work-item">
             <h3 data-lang-en="Project Management & Quality Standards" data-lang-th="การบริหารโครงการและมาตรฐานคุณภาพ">Project Management & Quality Standards</h3>
-            <p data-lang-en="In my role as a System Analyst, I was responsible for project management and quality standard control, a crucial part of developing efficient systems that comply with international standards." data-lang-th="ในฐานะ System Analyst ผมได้รับผิดชอบในส่วนของการบริหารโครงการและควบคุมมาตรฐานคุณภาพ ซึ่งเป็นส่วนสำคัญในการพัฒนาระบบให้มีประสิทธิภาพและเป็นไปตามข้อกำหนดสากล">
-                In my role as a System Analyst, I was responsible for project management and quality standard control, a crucial part of developing efficient systems that comply with international standards.
+            
+            <p data-lang-en="Owned responsibility for project governance and quality assurance across multiple initiatives. I established and enforced standardized processes that ensured compliance with international standards while maintaining team efficiency." data-lang-th="รับผิดชอบการบริหารโครงการและการประกันคุณภาพสำหรับหลายโปรเจกต์ โดยสถาปนาและบังคับใช้กระบวนการมาตรฐานที่สอดคล้องกับข้อกำหนดสากล">
+                Owned responsibility for project governance and quality assurance across multiple initiatives. I established and enforced standardized processes that ensured compliance with international standards while maintaining team efficiency.
             </p>
+
             <ul>
-                <li data-lang-en="<strong>ISO 29110:</strong> Acted as Project Manager to establish and develop standardized software processes." data-lang-th="<strong>ISO 29110:</strong> ดำเนินการในฐานะผู้จัดการโครงการ (Project Manager) เพื่อวางรากฐานและพัฒนากระบวนการทางด้านซอฟต์แวร์ให้ได้มาตรฐาน"><strong>ISO 29110:</strong> Acted as Project Manager to establish and develop standardized software processes.</li>
-                <li data-lang-en="<strong>ISO 27001:</strong> Served as the Document Control Coordinator (DCC), managing all system documentation to comply with information security standards." data-lang-th="<strong>ISO 27001:</strong> รับหน้าที่เป็นผู้ควบคุมเอกสาร (Document Control Coordinator - DCC) ดูแลจัดการเอกสารทั้งหมดในระบบให้เป็นไปตามมาตรฐานความปลอดภัยของข้อมูล"><strong>ISO 27001:</strong> Served as the Document Control Coordinator (DCC), managing all system documentation to comply with information security standards.</li>
-                <li data-lang-en="<strong>System Documentation:</strong> Created essential documents throughout the project development lifecycle, including PLANNING, Statement of Work (SOW), Software Requirement Specification (SRS), and User Acceptance Test (UAT)." data-lang-th="<strong>System Documentation:</strong> จัดทำเอกสารสำคัญตลอดวงจรการพัฒนาโปรเจกต์ ตั้งแต่ PLANNING, Statement of Work (SOW), Software Requirement Specification (SRS), จนถึง User Acceptance Test (UAT)"><strong>System Documentation:</strong> Created essential documents throughout the project development lifecycle, including PLANNING, Statement of Work (SOW), Software Requirement Specification (SRS), and User Acceptance Test (UAT).</li>
+                <li data-lang-en="<strong>ISO 29110 Implementation:</strong> Served as Project Manager to establish standardized software development processes. This framework helped the organization develop reliable, repeatable project workflows." data-lang-th="<strong>ISO 29110:</strong> ดำเนินการในฐานะ PM เพื่อสถาปนากระบวนการทำงานมาตรฐาน ทำให้องค์กรสามารถดำเนินงานได้อย่างน่าเชื่อถือและซ้ำได้"><strong>ISO 29110 Implementation:</strong> Served as Project Manager to establish standardized software development processes. This framework helped the organization develop reliable, repeatable project workflows.</li>
+                
+                <li data-lang-en="<strong>ISO 27001 Document Control:</strong> Acted as Document Control Coordinator managing all system documentation to meet information security standards. This included creating version-controlled documents that could be audited at any time." data-lang-th="<strong>ISO 27001:</strong> ดำเนินการในฐานะ DCC (Document Control Coordinator) ทำให้เอกสารทั้งหมดเป็นไปตามมาตรฐานความปลอดภัยข้อมูล พร้อมการ track การเปลี่ยนแปลง"><strong>ISO 27001 Document Control:</strong> Acted as Document Control Coordinator managing all system documentation to meet information security standards. This included creating version-controlled documents that could be audited at any time.</li>
+                
+                <li data-lang-en="<strong>System Documentation Lifecycle:</strong> Created critical documents throughout project phases—PLANNING documents that outline scope, SOW (Statement of Work) defining deliverables, SRS (Software Requirements Specification) documenting technical needs, and UAT (User Acceptance Test) protocols for validation." data-lang-th="<strong>จัดทำเอกสาร:</strong> สร้างเอกสารสำคัญในแต่ละขั้นตอน—PLANNING, SRS, SOW, และ UAT เพื่อให้โปรเจกต์มีความชัดเจนในแต่ละขั้นตอน"><strong>System Documentation Lifecycle:</strong> Created critical documents throughout project phases—PLANNING, SRS, SOW, and UAT to ensure clarity and traceability at each stage.</li>
             </ul>
-             <!-- <img src="https://storage.googleapis.com/gemini-prod/images/image_e5c4c5.jpg" alt="Organization Chart" class="work-image"> -->
+
             <div class="tags">
                 <span class="tag">Project Management</span>
                 <span class="tag">ISO 29110</span>
                 <span class="tag">ISO 27001</span>
-                <span class="tag">SRS</span>
-                <span class="tag">UAT</span>
+                <span class="tag">Documentation</span>
+                <span class="tag">Quality Assurance</span>
             </div>
         </div>
         
         <!-- Data & Backend Engineering -->
         <div class="work-item">
             <h3 data-lang-en="Data & Backend Engineering" data-lang-th="วิศวกรรมข้อมูลและระบบหลังบ้าน">Data & Backend Engineering</h3>
-            <p data-lang-en="Developed and maintained backend systems and data management processes to support front-end operations and reporting systems." data-lang-th="พัฒนาและดูแลระบบหลังบ้าน รวมถึงกระบวนการจัดการข้อมูล เพื่อสนับสนุนการทำงานของส่วนหน้าและระบบรีพอร์ต">
-                Developed and maintained backend systems and data management processes to support front-end operations and reporting systems.
+            
+            <p data-lang-en="Designed and maintained robust backend systems and data pipelines to support reporting and analytics. I built ETL processes that transformed raw data into actionable insights for business intelligence dashboards." data-lang-th="ออกแบบและดูแลระบบหลังบ้านและ data pipeline ที่มีความทนทาน เพื่อสนับสนุนรีพอร์ตและการวิเคราะห์ข้อมูล">
+                Designed and maintained robust backend systems and data pipelines to support reporting and analytics. I built ETL processes that transformed raw data into actionable insights for business intelligence dashboards.
             </p>
+
             <ul>
-                <li data-lang-en="<strong>ETL Process:</strong> Developed Extract, Transform, Load (ETL) processes for data management using Python." data-lang-th="<strong>ETL Process:</strong> พัฒนากระบวนการ Extract, Transform, Load (ETL) สำหรับจัดการข้อมูล โดยใช้ภาษา Python"><strong>ETL Process:</strong> Developed Extract, Transform, Load (ETL) processes for data management using Python.</li>
-                <li data-lang-en="<strong>Web Scraping:</strong> Created an automated system to scrape data from various websites and store it in a database." data-lang-th="<strong>Web Scraping:</strong> สร้างระบบดึงข้อมูลจากหน้าเว็บไซต์ต่างๆ แบบอัตโนมัติเพื่อนำมาจัดเก็บลงฐานข้อมูล"><strong>Web Scraping:</strong> Created an automated system to scrape data from various websites and store it in a database.</li>
-                <li data-lang-en="<strong>Azure Blob Management:</strong> Utilized Azure Data Factory (ADF) to implement a Freeze and Deploy system for managing data in Azure Blob Storage." data-lang-th="<strong>Azure Blob Management:</strong> ใช้ Azure Data Factory (ADF) ในการทำระบบ Freeze and Deploy เพื่อบริหารจัดการข้อมูลบน Azure Blob Storage"><strong>Azure Blob Management:</strong> Utilized Azure Data Factory (ADF) to implement a Freeze and Deploy system for managing data in Azure Blob Storage.</li>
-                <li data-lang-en="<strong>Reporting Backend:</strong> Developed a backend with Node.js to send data to Elasticsearch for creating reports and dashboards." data-lang-th="<strong>Reporting Backend:</strong> พัฒนา Backend ด้วย Node.js เพื่อส่งข้อมูลไปยัง Elasticsearch สำหรับนำไปสร้าง Report และ Dashboard"><strong>Reporting Backend:</strong> Developed a backend with Node.js to send data to Elasticsearch for creating reports and dashboards.</li>
+                <li data-lang-en="<strong>ETL Pipeline Development:</strong> Created Extract-Transform-Load processes using Python to automate data integration. These pipelines gathered data from multiple sources, cleaned and validated it, then loaded it into storage systems." data-lang-th="<strong>ETL:</strong> พัฒนากระบวนการดึง-แปลง-บันทึก (ETL) ด้วย Python เพื่อรวมข้อมูลจากแหล่งต่างๆ แล้วทำความสะอาดและตรวจสอบคุณภาพ"><strong>ETL Pipeline Development:</strong> Created Extract-Transform-Load processes using Python to automate data integration from multiple sources.</li>
+                
+                <li data-lang-en="<strong>Web Data Automation:</strong> Built automated web scraping systems that continuously collected data from target websites and stored it in databases for analysis. This reduced manual data collection efforts significantly." data-lang-th="<strong>Web Scraping:</strong> สร้างระบบดึงข้อมูลจากเว็บไซต์แบบอัตโนมัติและจัดเก็บในฐานข้อมูล"><strong>Web Data Automation:</strong> Built automated web scraping systems that continuously collected data and stored it for analysis.</li>
+                
+                <li data-lang-en="<strong>Cloud Storage Management:</strong> Implemented a Freeze & Deploy system using Azure Data Factory to manage data lifecycle in Azure Blob Storage. This ensured data was organized, versioned, and easily retrievable." data-lang-th="<strong>Azure Blob Storage:</strong> ใช้ Azure Data Factory สร้างระบบ Freeze & Deploy เพื่อจัดการข้อมูล"><strong>Cloud Storage Management:</strong> Implemented Freeze & Deploy system using Azure Data Factory for Azure Blob Storage lifecycle management.</li>
+                
+                <li data-lang-en="<strong>Analytics Backend:</strong> Developed Node.js backend services that fed processed data into Elasticsearch, enabling real-time dashboards and comprehensive reporting capabilities for business teams." data-lang-th="<strong>Node.js Backend:</strong> พัฒนา backend ส่งข้อมูลไปยัง Elasticsearch เพื่อสร้างรีพอร์ตและแดชบอร์ด"><strong>Analytics Backend:</strong> Developed Node.js services to feed data to Elasticsearch for real-time dashboards and reporting.</li>
             </ul>
+
             <div class="tags">
                 <span class="tag">Python</span>
                 <span class="tag">ETL</span>
@@ -270,55 +375,69 @@
         <!-- Telephony & IVR Systems -->
         <div class="work-item">
             <h3 data-lang-en="Telephony & IVR Systems" data-lang-th="ระบบโทรศัพท์และ IVR">Telephony & IVR Systems</h3>
-            <p data-lang-en="Managed and developed Interactive Voice Response (IVR) and Callflow systems to improve customer experience and service efficiency." data-lang-th="ดูแลและพัฒนาระบบโทรศัพท์ตอบรับอัตโนมัติ (IVR) และ Callflow เพื่อปรับปรุงประสบการณ์ของลูกค้าและเพิ่มประสิทธิภาพการบริการ">
-                Managed and developed Interactive Voice Response (IVR) and Callflow systems to improve customer experience and service efficiency.
+            
+            <p data-lang-en="Managed end-to-end development of Interactive Voice Response (IVR) and voicebot systems for telecommunications clients. I designed call flows that intelligently route customer inquiries, reducing wait times and improving service satisfaction." data-lang-th="บริหารการพัฒนาระบบโทรศัพท์อัตโนมัติ (IVR) และ voicebot ชั้นสูง เพื่อบริษัทโทรคมนาคม โดยออกแบบเส้นทางการรับสายที่ชาญฉลาด">
+                Managed end-to-end development of Interactive Voice Response (IVR) and voicebot systems for telecommunications clients. I designed call flows that intelligently route customer inquiries, reducing wait times and improving service satisfaction.
             </p>
+
             <ul>
-                <li data-lang-en="<strong>Callflow Management:</strong> Used the sequential-workflow-designer-pro tool to design and manage call flows." data-lang-th="<strong>Callflow Management:</strong> ใช้เครื่องมือ sequential-workflow-designer-pro ในการออกแบบและจัดการ Callflow"><strong>Callflow Management:</strong> Used the sequential-workflow-designer-pro tool to design and manage call flows.</li>
-                <li data-lang-en="<strong>Project *137:</strong> In 2023, I managed the *137 project for True's SMS cancellation service (by eggdigital), which involved studying and customizing call flows, writing dial plans, and understanding the Asterisk architecture." data-lang-th="<strong>Project *137:</strong> ในปี 2023 ได้ดูแลโปรเจกต์ *137 บริการยกเลิก SMS ของ True (by eggdigital) โดยได้ศึกษาและปรับแต่ง Callflow, เขียน Dial plan และทำความเข้าใจสถาปัตยกรรมของ Asterisk"><strong>Project *137:</strong> In 2023, I managed the *137 project for True's SMS cancellation service (by eggdigital), which involved studying and customizing call flows, writing dial plans, and understanding the Asterisk architecture.</li>
-                <li data-lang-en="<strong>System Knowledge:</strong> Gained expertise in related systems, including Chatbot, Inbound, and Outbound call operations." data-lang-th="<strong>System Knowledge:</strong> เรียนรู้และทำความเข้าใจระบบงานต่างๆ ที่เกี่ยวข้อง เช่น Chatbot, Inbound, และ Outbound call"><strong>System Knowledge:</strong> Gained expertise in related systems, including Chatbot, Inbound, and Outbound call operations.</li>
+                <li data-lang-en="<strong>Callflow Design:</strong> Designed and maintained sophisticated call flows using sequential-workflow-designer-pro. Each flow was carefully crafted to handle different customer scenarios—inquiries, complaints, transactions—with natural progression." data-lang-th="<strong>Callflow:</strong> ออกแบบเส้นทางการรับสายที่ซับซ้อนเพื่อบริหารสถานการณ์ต่างๆ"><strong>Callflow Design:</strong> Designed sophisticated call flows to handle diverse customer scenarios with natural progression.</li>
+                
+                <li data-lang-en="<strong>True Project (*137):</strong> Managed the SMS cancellation service for True. I studied the existing system, customized call flows for this use case, wrote Asterisk dial plans (specialized routing rules), and applied telecommunications architecture best practices." data-lang-th="<strong>True *137:</strong> จัดการบริการยกเลิก SMS ของ True โดยปรับแต่ง callflow และเขียน Asterisk dial plan"><strong>True Project (*137):</strong> Managed SMS cancellation service for True with customized call flows and Asterisk dial plans.</li>
+                
+                <li data-lang-en="<strong>Voicebot Proof-of-Concepts:</strong> Delivered proof-of-concept voice AI systems for major brands—Pizza Hut (ordering), TOYOTA (service booking), GRAMMY (ticket support), Arthit International Hospital (appointment scheduling), and SRT (ticket inquiries)." data-lang-th="<strong>Voicebot POCs:</strong> นำเสนอระบบ voicebot สำหรับ Pizza Hut, TOYOTA, GRAMMY, โรงพยาบาล, และ SRT"><strong>Voicebot POCs:</strong> Delivered voice AI systems for Pizza Hut, TOYOTA, GRAMMY, Arthit International Hospital, and SRT.</li>
+                
+                <li data-lang-en="<strong>AEON Multilingual Platform:</strong> Built proof-of-concepts for AEON with voicebot support in Thai, English, and Japanese languages, plus Thai chatbot integration—demonstrating scalable multilingual AI capabilities." data-lang-th="<strong>AEON:</strong> สร้าง POC ของ AEON ด้วย voicebot 3 ภาษา (ไทย อังกฤษ ญี่ปุ่น) และ chatbot"><strong>AEON Multilingual Platform:</strong> Built POCs with voicebot in Thai, English, and Japanese, plus Thai chatbot.</li>
+                
+                <li data-lang-en="<strong>Workflow Automation & Testing:</strong> Used n8n (no-code automation platform) and AVA (telephony testing tool) to automate testing workflows and validate system performance before production deployment." data-lang-th="<strong>Tools:</strong> ใช้ n8n และ AVA ในการ automate workflow และทดสอบระบบ"><strong>Workflow Automation & Testing:</strong> Used n8n and AVA for automation and comprehensive telephony system validation.</li>
             </ul>
-             <!-- <img src="https://storage.googleapis.com/gemini-prod/images/image_e5db4b.png" alt="Task Management System" class="work-image"> -->
+
             <div class="tags">
-                <span class="tag">IVR</span>
-                <span class="tag">Callflow</span>
+                <span class="tag">IVR Systems</span>
+                <span class="tag">Callflow Design</span>
                 <span class="tag">Asterisk</span>
-                <span class="tag">Dial Plan</span>
-                <span class="tag">Chatbot</span>
+                <span class="tag">Voicebot</span>
+                <span class="tag">n8n</span>
+                <span class="tag">AVA Platform</span>
             </div>
         </div>
         
-        <!-- Web & Internal Systems Development -->
+        <!-- Web & Internal Systems -->
         <div class="work-item">
             <h3 data-lang-en="Web & Internal Systems Development" data-lang-th="การพัฒนาเว็บและระบบภายใน">Web & Internal Systems Development</h3>
-            <p data-lang-en="Developed websites and internal systems to support operations and improve convenience for employees." data-lang-th="พัฒนาเว็บไซต์และระบบภายในองค์กรเพื่อสนับสนุนการทำงานและเพิ่มความสะดวกสบายให้กับพนักงาน">
-                Developed websites and internal systems to support operations and improve convenience for employees.
+            
+            <p data-lang-en="Developed customer-facing websites and internal tools that streamlined operations and improved user experiences. These projects ranged from company web presence to employee productivity tools." data-lang-th="พัฒนาเว็บไซต์และเครื่องมือภายใน เพื่อปรับปรุงประสิทธิภาพการทำงาน">
+                Developed customer-facing websites and internal tools that streamlined operations and improved user experiences. These projects ranged from company web presence to employee productivity tools.
             </p>
+
             <ul>
-                <li data-lang-en="<strong>Company Website:</strong> Contributed to the development of the main company website, <a href='https://sun-system.com/' target='_blank'>sun-system.com</a>, using PHP." data-lang-th="<strong>Company Website:</strong> มีส่วนร่วมในการพัฒนาเว็บไซต์หลักของบริษัท <a href='https://sun-system.com/' target='_blank'>sun-system.com</a> โดยใช้ PHP"><strong>Company Website:</strong> Contributed to the development of the main company website, <a href="https://sun-system.com/" target="_blank">sun-system.com</a>, using PHP.</li>
-                <li data-lang-en="<strong>Daily Lunch Order System:</strong> Created a daily lunch ordering system for employees using PHP and HTML." data-lang-th="<strong>Daily Lunch Order System:</strong> สร้างระบบสั่งข้าวประจำวันสำหรับพนักงานด้วย PHP และ HTML"><strong>Daily Lunch Order System:</strong> Created a daily lunch ordering system for employees using PHP and HTML.</li>
-                <li data-lang-en="<strong>Work Tracking System:</strong> Developed a work tracking system using AppSheet for systematic task management." data-lang-th="<strong>Work Tracking System:</strong> พัฒนาระบบติดตามการทำงาน (Tracking) โดยใช้ AppSheet เพื่อให้การจัดการงานเป็นไปอย่างมีระบบ"><strong>Work Tracking System:</strong> Developed a work tracking system using AppSheet for systematic task management.</li>
+                <li data-lang-en="<strong>Corporate Website:</strong> Contributed to the main company website <a href='https://sun-system.com/' target='_blank' style='color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid var(--accent-primary);'>sun-system.com</a> using PHP and modern web standards. The site showcases company services and serves as the primary digital presence." data-lang-th="<strong>Company Website:</strong> ช่วยพัฒนา <a href='https://sun-system.com/' target='_blank' style='color: var(--accent-primary); text-decoration: none; border-bottom: 1px solid var(--accent-primary);'>sun-system.com</a> ด้วย PHP"><strong>Corporate Website:</strong> Contributed to sun-system.com using PHP, serving as the company's digital presence.</li>
+                
+                <li data-lang-en="<strong>Employee Lunch Ordering System:</strong> Created an internal web application for daily meal ordering. Employees can browse menu options, place orders, and track their selections—reducing the overhead of manual order collection." data-lang-th="<strong>Lunch Order System:</strong> สร้างระบบสั่งข้าวประจำวันเพื่อพนักงาน"><strong>Employee Lunch Ordering System:</strong> Built internal tool for daily meal ordering using PHP and HTML.</li>
+                
+                <li data-lang-en="<strong>Work Tracking System:</strong> Developed a task management system using AppSheet (low-code platform) to provide systematic work tracking. This tool helps teams organize tasks, assign responsibilities, and monitor progress efficiently." data-lang-th="<strong>Work Tracking:</strong> สร้างระบบติดตามงาน ใช้ AppSheet เพื่อให้จัดการงานเป็นระบบ"><strong>Work Tracking System:</strong> Built task management system using AppSheet for systematic work organization.</li>
             </ul>
+
             <div class="tags">
                 <span class="tag">PHP</span>
                 <span class="tag">HTML</span>
                 <span class="tag">AppSheet</span>
+                <span class="tag">Web Development</span>
                 <span class="tag">Internal Tools</span>
             </div>
         </div>
 
         <div class="back-btn-container">
-            <a href="index.html" class="btn" data-lang-en="‹ Back to Home" data-lang-th="‹ กลับหน้าหลัก">‹ Back to Home</a>
+            <a href="index.html" class="btn" data-lang-en="← Back to Home" data-lang-th="← กลับหน้าหลัก">← Back to Home</a>
         </div>
     </main>
 
     <script>
-        // --- JavaScript for Theme and Language Toggles ---
+        // Theme Toggle Logic
         const themeToggleButton = document.getElementById('theme-toggle');
         const langToggleButton = document.getElementById('lang-toggle');
         const body = document.body;
 
-        // --- Theme Toggle Logic ---
         const setTheme = (theme) => {
             if (theme === 'dark') {
                 body.classList.add('dark-mode');
@@ -343,7 +462,7 @@
             localStorage.setItem('theme', newTheme);
         });
 
-        // --- Language Toggle Logic ---
+        // Language Toggle Logic
         const setLanguage = (lang) => {
             document.documentElement.lang = lang;
             const elementsToTranslate = document.querySelectorAll('[data-lang-en]');
@@ -357,10 +476,8 @@
 
             if (lang === 'th') {
                 langToggleButton.textContent = 'EN';
-                langToggleButton.title = 'Switch to English';
             } else {
                 langToggleButton.textContent = 'TH';
-                langToggleButton.title = 'เปลี่ยนเป็นภาษาไทย';
             }
             localStorage.setItem('language', lang);
         };
@@ -371,10 +488,8 @@
             setLanguage(newLang);
         });
 
-        // Initialize language on page load, default to Thai
         const savedLang = localStorage.getItem('language') || 'en';
         setLanguage(savedLang);
     </script>
 </body>
 </html>
-

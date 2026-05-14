@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -8,95 +8,126 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
 
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 
     <style>
         /* --- CSS Variables for Theming --- */
         :root {
-            --bg-color: #f0e7db;
-            --text-color: #202023;
-            --heading-color: #333;
-            --link-color: #3d7aed;
-            --accent-color: #319795;
-            /* Teal color */
-            --card-bg-color: rgba(255, 255, 255, 0.5);
-            --border-color: rgba(0, 0, 0, 0.1);
-            --section-title-border: #525252;
-            --font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --bg-color: #fafafa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666;
+            --accent-primary: #0066cc;
+            --accent-secondary: #00b8a9;
+            --card-bg: #ffffff;
+            --border-color: #e8e8e8;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         body.dark-mode {
-            --bg-color: #202023;
-            --text-color: #eee;
-            --heading-color: #eee;
-            --link-color: #88ccff;
-            --accent-color: #81e6d9;
-            /* Lighter Teal for dark mode */
-            --card-bg-color: rgba(255, 255, 255, 0.08);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --section-title-border: #a0aec0;
+            --bg-color: #0f0f0f;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #6db3ff;
+            --accent-secondary: #4dd9d0;
+            --card-bg: #1a1a1a;
+            --border-color: #2a2a2a;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         /* --- General Styles --- */
         body {
-            font-family: var(--font-family);
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
+            color: var(--text-primary);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+            font-weight: 400;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
         }
 
         /* --- Header / Navbar --- */
         .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.2rem 2rem;
+        }
+
+        body.dark-mode .navbar {
+            background-color: rgba(15, 15, 15, 0.8);
+        }
+
+        .navbar-content {
+            max-width: 900px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 1.5rem;
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .nav-logo {
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-decoration: none;
-            color: var(--heading-color);
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
-            margin-left: 1.5rem;
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text-primary);
             font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-primary);
         }
 
         .theme-toggle-btn {
-            background-color: #805AD5;
-            /* Purple */
+            background-color: var(--accent-primary);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 0.5rem;
+            border-radius: 6px;
+            padding: 0.6rem 0.8rem;
             cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
-        /* --- Voxel Dog Container Styles (ฉบับแก้ไข) --- */
+        .theme-toggle-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        /* --- 3D Model Container --- */
         @keyframes spin {
             to {
                 transform: rotate(360deg);
@@ -119,10 +150,8 @@
         }
 
         .voxel-dog-container {
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 2rem;
             position: relative;
-            margin-bottom: 1.5rem;
             width: 200px;
             height: 200px;
         }
@@ -148,12 +177,14 @@
 
         /* --- Intro Box --- */
         .intro-box {
-            background-color: var(--card-bg-color);
-            border-radius: 12px;
-            padding: 0.75rem;
-            margin-bottom: 1.5rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 2rem;
             text-align: center;
             font-weight: 500;
+            box-shadow: var(--shadow);
         }
 
         /* --- Profile Section --- */
@@ -169,55 +200,60 @@
 
         .profile-image-box {
             flex-shrink: 0;
-            margin-left: 1.5rem;
+            margin-left: 2rem;
             text-align: center;
         }
 
         .profile-image {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--border-color);
             object-fit: cover;
-            transition: box-shadow 0.3s ease; /* เพิ่ม transition เพื่อความนุ่มนวล */
-        }
-        
-        /* --- 🟢 CSS ที่เพิ่มเข้ามา: Hover Effect --- */
-        .profile-image:hover {
-            cursor: pointer;
-            box-shadow: 0 0 15px 4px #48bb78; /* เงาสีเขียวรอบรูป */
+            transition: box-shadow 0.3s ease, transform 0.2s ease;
         }
 
-        h1,
-        h2,
-        h3 {
-            color: var(--heading-color);
+        .profile-image:hover {
+            cursor: pointer;
+            box-shadow: 0 0 15px 4px var(--accent-secondary);
+            transform: scale(1.05);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-primary);
             margin-top: 0;
             font-weight: 700;
         }
 
         .page-title {
-            font-size: 2rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 2.8rem;
             margin-bottom: 0.25rem;
+            letter-spacing: -0.5px;
+            font-weight: 600;
         }
 
         .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
             margin: 0;
-            font-weight: normal;
+            font-weight: 400;
         }
 
         /* --- Section Styles --- */
         .section {
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            text-decoration: underline;
-            text-underline-offset: 6px;
-            text-decoration-color: var(--section-title-border);
-            text-decoration-thickness: 4px;
-            margin-bottom: 1rem;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--accent-primary);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
         }
 
         /* --- List Styles --- */
@@ -230,108 +266,146 @@
         .summary-list li {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
         }
 
         .summary-list .icon {
-            color: #48bb78;
+            color: var(--accent-secondary);
             margin-right: 0.75rem;
-            margin-top: 4px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .summary-list span {
+            color: var(--text-secondary);
         }
 
         /* --- Button --- */
         .portfolio-btn-container {
             text-align: center;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--accent-color);
+            padding: 0.9rem 1.8rem;
+            background-color: var(--accent-primary);
             color: white;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: opacity 0.2s, transform 0.2s;
         }
 
         .btn:hover {
-            opacity: 0.8;
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
         .btn .icon-right {
             margin-left: 0.5rem;
-            font-weight: bold;
         }
 
         /* --- Bio Section --- */
         .bio-section {
-            display: flex;
-            margin-bottom: 0.5rem;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .bio-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .bio-year {
-            font-weight: bold;
-            margin-right: 1rem;
-            flex-shrink: 0;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-right: 1.5rem;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        .bio-content {
+            display: inline-block;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .bio-content b {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .bio-content i {
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
         .bio-section ul {
             padding-left: 20px;
-            margin-top: 0.25rem;
+            margin-top: 0.8rem;
         }
 
-        /* --- On the Web Section --- */
+        .bio-section ul li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Social List --- */
         .social-list {
             list-style: none;
             padding: 0;
         }
 
         .social-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         .social-btn {
             background: none;
             border: none;
-            padding: 0.5rem 0.75rem;
-            color: var(--accent-color);
+            padding: 0.6rem 0.75rem;
+            color: var(--accent-primary);
             font-size: 1rem;
             display: inline-flex;
             align-items: center;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
             transition: background-color 0.2s;
-            font-weight: 700;
+            font-weight: 500;
+            cursor: pointer;
         }
 
         .social-btn:hover {
-            background-color: var(--card-bg-color);
+            background-color: var(--card-bg);
         }
 
         .social-btn svg {
             width: 20px;
             height: 20px;
-            margin-right: 0.5rem;
+            margin-right: 0.75rem;
             fill: currentColor;
         }
-        
-        /* --- 🟢 CSS ที่เพิ่มเข้ามา: Modal Styles --- */
+
+        /* --- Modal Styles --- */
         .modal {
-            display: none; /* ซ่อนไว้เป็นค่าเริ่มต้น */
-            position: fixed; 
-            z-index: 20; 
-            padding-top: 100px; 
+            display: none;
+            position: fixed;
+            z-index: 200;
+            padding-top: 100px;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto; 
-            background-color: rgba(0,0,0,0.9); /* พื้นหลังสีดำโปร่งแสง */
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
         }
 
         .modal-content {
@@ -339,15 +413,15 @@
             display: block;
             width: 80%;
             max-width: 400px;
-            border-radius: 50%; /* ทำให้รูปเป็นวงกลม */
-            border: 5px solid var(--bg-color); /* ขอบสีขาวรอบรูป */
+            border-radius: 50%;
+            border: 5px solid var(--bg-color);
             animation-name: zoom;
             animation-duration: 0.5s;
         }
-        
+
         @keyframes zoom {
-            from {transform: scale(0)}
-            to {transform: scale(1)}
+            from { transform: scale(0); }
+            to { transform: scale(1); }
         }
 
         .close {
@@ -358,15 +432,14 @@
             font-size: 40px;
             font-weight: bold;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .close:hover,
         .close:focus {
             color: #bbb;
             text-decoration: none;
-            cursor: pointer;
         }
-
 
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
@@ -376,13 +449,34 @@
 
             .profile-image-box {
                 margin-left: 0;
-                margin-top: 1rem;
-                width: 100%;
+                margin-top: 1.5rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
             }
 
             .nav-links a {
                 display: none;
             }
+
+            .bio-year {
+                display: block;
+                margin-bottom: 0.5rem;
+            }
+
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
             .modal-content {
                 width: 90%;
             }
@@ -393,9 +487,11 @@
 <body>
 
     <header class="navbar">
-        <a href="/" class="nav-logo">Napaphon Gulnaphim</a>
-        <div>
-            <button id="theme-toggle" class="theme-toggle-btn" title="Toggle dark mode">🌙</button>
+        <div class="navbar-content">
+            <a href="/" class="nav-logo">Napaphon Gulnaphim</a>
+            <div class="nav-links">
+                <button id="theme-toggle" class="theme-toggle-btn" title="Toggle dark mode">🌙</button>
+            </div>
         </div>
     </header>
 
@@ -410,13 +506,13 @@
         </div>
 
         <div class="intro-box">
-            Hello, I'm a Software Developer based in Thailand!
+            👋 Hello, I'm a Software Developer & System Analyst based in Thailand!
         </div>
 
         <div class="profile-section">
             <div class="profile-info">
                 <h1 class="page-title">Napaphon Gulnaphim</h1>
-                <p class="page-subtitle">Computer Science Graduate / Developer</p>
+                <p class="page-subtitle">Computer Science Graduate / Full-Stack Developer</p>
             </div>
             <div class="profile-image-box">
                 <img src="images/profile.jpg" alt="Profile image" class="profile-image" id="profileImage">
@@ -427,28 +523,30 @@
             <h3 class="section-title">Summary of Qualification</h3>
             <ul class="summary-list">
                 <li>
-                    <span class="icon">✅</span>
-                    <span>In-depth understanding of computer systems, software and application operations, with an
-                        ability to analyze and troubleshoot problems.</span>
+                    <span class="icon">✓</span>
+                    <span>In-depth understanding of computer systems, software and application operations, with strong ability to analyze and troubleshoot complex problems.</span>
                 </li>
                 <li>
-                    <span class="icon">✅</span>
-                    <span>Proficient in web development using PHP, JavaScript, and MySQL.</span>
+                    <span class="icon">✓</span>
+                    <span>Proficient in web development using PHP, JavaScript, Python, Node.js, and databases (MySQL, Elasticsearch).</span>
                 </li>
                 <li>
-                    <span class="icon">✅</span>
-                    <span>Strong analytical, problem-solving, and interpersonal skills.</span>
+                    <span class="icon">✓</span>
+                    <span>Expert in IVR systems, chatbot development, callflow design, and telecommunications architecture.</span>
                 </li>
                 <li>
-                    <span class="icon">✅</span>
-                    <span>A detail-oriented, enthusiastic team player, willing to learn new things and able to work well
-                        under pressure.</span>
+                    <span class="icon">✓</span>
+                    <span>Strong analytical, problem-solving, and interpersonal skills with proven project management experience.</span>
+                </li>
+                <li>
+                    <span class="icon">✓</span>
+                    <span>Detail-oriented, enthusiastic team player with ability to learn quickly and perform well under pressure.</span>
                 </li>
             </ul>
             <div class="portfolio-btn-container">
-                <a href="/work.html" class="btn">
-                    My Portfolio
-                    <span class="icon-right">›</span>
+                <a href="work.html" class="btn">
+                    View My Portfolio
+                    <span class="icon-right">→</span>
                 </a>
             </div>
         </section>
@@ -457,29 +555,43 @@
             <h3 class="section-title">Education Background</h3>
             <div class="bio-section">
                 <span class="bio-year">2017 - 2022</span>
-                <span>
-                    <b>Bachelor of Science in Computer Sciences (GPA 3.31)</b><br>
-                    Pibulsongkram Rajabhat University<br>
-                    <i>Senior Project: Model to Predict the Graduation Characteristics of Undergraduate Student Using
-                        Data Mining Techniques.</i>
-                </span>
+                <div class="bio-content">
+                    <b>Bachelor of Science in Computer Sciences</b> <br>
+                    GPA: 3.31<br>
+                    <b>Pibulsongkram Rajabhat University</b><br>
+                    <i>Senior Project: Model to Predict the Graduation Characteristics of Undergraduate Student Using Data Mining Techniques.</i>
+                </div>
             </div>
         </section>
 
         <section class="section">
-            <h3 class="section-title">Internship Experience</h3>
+            <h3 class="section-title">Work Experience</h3>
+            <div class="bio-section">
+                <span class="bio-year">2022 - Present</span>
+                <div class="bio-content">
+                    <b>System Analyst</b><br>
+                    <b>SUN SYSTEM CORPORATION LTD.</b><br>
+                    <ul>
+                        <li>Develop and manage IVR & voicebot systems for telecommunications clients</li>
+                        <li>Design complex callflows and telephony architecture</li>
+                        <li>Lead ETL pipelines and backend data engineering projects</li>
+                        <li>Manage project governance and ISO quality standards implementation</li>
+                        <li>Create technical documentation and system specifications</li>
+                    </ul>
+                </div>
+            </div>
             <div class="bio-section">
                 <span class="bio-year">2020 - 2021</span>
-                <span>
+                <div class="bio-content">
                     <b>Trainee, IT-Development Department</b><br>
-                    U Info Co., Ltd.
+                    <b>U Info Co., Ltd.</b><br>
                     <ul>
-                        <li>Worked with team members to design algorithms and flowcharts.</li>
-                        <li>Produced clean and efficient code based on specifications.</li>
-                        <li>Analyzed, troubleshooted, and upgraded existing software.</li>
-                        <li>Created technical documentation for reference and reporting.</li>
+                        <li>Designed algorithms and flowcharts with team members</li>
+                        <li>Produced clean and efficient code based on specifications</li>
+                        <li>Analyzed, troubleshot, and upgraded existing software</li>
+                        <li>Created technical documentation for reference and reporting</li>
                     </ul>
-                </span>
+                </div>
             </div>
         </section>
 
@@ -487,15 +599,15 @@
             <h3 class="section-title">Certificates & Training</h3>
             <div class="bio-section">
                 <span class="bio-year">2021</span>
-                <span>Certified Professional Qualification Level 3 in System Design Analyst from TPQI.</span>
+                <div class="bio-content">Certified Professional Qualification Level 3 in System Design Analyst from TPQI.</div>
             </div>
             <div class="bio-section">
                 <span class="bio-year">2020</span>
-                <span>MikroTik Certified Network Associate (MTCNA).</span>
+                <div class="bio-content">MikroTik Certified Network Associate (MTCNA).</div>
             </div>
             <div class="bio-section">
                 <span class="bio-year">2019</span>
-                <span>IC3 Global Standard 5 Digital Literacy Certification.</span>
+                <div class="bio-content">IC3 Global Standard 5 Digital Literacy Certification.</div>
             </div>
         </section>
 
@@ -503,27 +615,25 @@
             <h3 class="section-title">Awards & Achievements</h3>
             <div class="bio-section">
                 <span class="bio-year">2022</span>
-                <span>Received an Honorable Award for the senior project at the Outstanding Cooperative Education
-                    Contest.</span>
+                <div class="bio-content">Received an Honorable Award for the senior project at the Outstanding Cooperative Education Contest.</div>
             </div>
             <div class="bio-section">
                 <span class="bio-year">2022</span>
-                <span>Won a Good Presentation Award at the 6th National Conference on Science and Technology
-                    (NCOST).</span>
+                <div class="bio-content">Won a Good Presentation Award at the 6th National Conference on Science and Technology (NCOST).</div>
             </div>
             <div class="bio-section">
                 <span class="bio-year">2018</span>
-                <span>Awarded a Medal for Excellent Academic Performance.</span>
+                <div class="bio-content">Awarded a Medal for Excellent Academic Performance.</div>
             </div>
         </section>
 
         <section class="section">
             <h3 class="section-title">I ♥</h3>
-            <p>Gaming, Rock Music, Data Mining & Machine Learning, Photography</p>
+            <p style="color: var(--text-secondary); line-height: 1.8;">Gaming • Rock Music • Data Mining & Machine Learning • Photography</p>
         </section>
 
-       <section class="section">
-            <h3 class="section-title">On the web</h3>
+        <section class="section">
+            <h3 class="section-title">On the Web</h3>
             <ul class="social-list">
                 <li>
                     <a href="https://github.com/hs6uej" target="_blank" class="social-btn">
@@ -532,28 +642,28 @@
                                 d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
                             </path>
                         </svg>
-                        @hs6uej
-                    </a>
-                </li>
-                 <li>
-                    <a href="https://steamcommunity.com/id/hs6uej" target="_blank" class="social-btn">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8s8 3.589 8 8s-3.589 8-8 8zm4.34-11.374l-5.487 2.261l2.251-5.487a5.59 5.59 0 0 1 3.236 3.226zM12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9zm-4.34 7.374l5.487-2.261l-2.251 5.487a5.59 5.59 0 0 1-3.236-3.226zM9.5 12a1 1 0 1 1-2 0a1 1 0 0 1 2 0z"/>
-                        </svg>
-                        Steam
+                        GitHub: @hs6uej
                     </a>
                 </li>
                 <li>
-                    <a class="social-btn" style="cursor: default; text-decoration: none;">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                           <path d="M18.4 3.6c-4.2-4.2-11-4.2-15.2 0s-4.2 11 0 15.2c4.2 4.2 11 4.2 15.2 0 .2-.2.4-.4.6-.6l.1-.1c.3-.4.6-.8.8-1.2L22 12.3V9.6l-.5-2.2c-.3-1-.7-2-1.3-2.9l-.1-.1c-.1-.1-.2-.2-.2-.3zM12 20.3c-1.4 0-2.8-.3-4.1-.9l-2.4 1.2l.6-2.6C5 17 4.3 15.8 3.9 14.5c-1-3.6.2-7.6 3.8-8.7c3.9-1.2 8 .9 9.1 4.8c1.2 3.9-.9 8-4.8 9.1c-1 .3-2 .4-3 .4zm-3-8.6c.7 0 1.2.6 1.2 1.2s-.5 1.2-1.2 1.2s-1.2-.5-1.2-1.2s.6-1.2 1.2-1.2zm6 0c.7 0 1.2.6 1.2 1.2s-.5 1.2-1.2 1.2s-1.2-.5-1.2-1.2c.1-.7.6-1.2 1.2-1.2z"/>
+                    <a href="https://steamcommunity.com/id/hs6uej" target="_blank" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8s8 3.589 8 8s-3.589 8-8 8zm4.34-11.374l-5.487 2.261l2.251-5.487a5.59 5.59 0 0 1 3.236 3.226zM12 7.5a4.5 4.5 0 1 0 0 9a4.5 4.5 0 0 0 0-9zm-4.34 7.374l5.487-2.261l-2.251 5.487a5.59 5.59 0 0 1-3.236-3.226zM9.5 12a1 1 0 1 1-2 0a1 1 0 0 1 2 0z"/>
                         </svg>
-                        LINE ID: themacsality
+                        Steam: @hs6uej
                     </a>
                 </li>
-                 <li>
-                    <a href="mailto:hs6uej@gmail.com" target="_blank" class="social-btn">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <li>
+                    <a class="social-btn" style="cursor: default;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.4 3.6c-4.2-4.2-11-4.2-15.2 0s-4.2 11 0 15.2c4.2 4.2 11 4.2 15.2 0 .2-.2.4-.4.6-.6l.1-.1c.3-.4.6-.8.8-1.2L22 12.3V9.6l-.5-2.2c-.3-1-.7-2-1.3-2.9l-.1-.1c-.1-.1-.2-.2-.2-.3zM12 20.3c-1.4 0-2.8-.3-4.1-.9l-2.4 1.2l.6-2.6C5 17 4.3 15.8 3.9 14.5c-1-3.6.2-7.6 3.8-8.7c3.9-1.2 8 .9 9.1 4.8c1.2 3.9-.9 8-4.8 9.1c-1 .3-2 .4-3 .4zm-3-8.6c.7 0 1.2.6 1.2 1.2s-.5 1.2-1.2 1.2s-1.2-.5-1.2-1.2s.6-1.2 1.2-1.2zm6 0c.7 0 1.2.6 1.2 1.2s-.5 1.2-1.2 1.2s-1.2-.5-1.2-1.2c.1-.7.6-1.2 1.2-1.2z"/>
+                        </svg>
+                        LINE: themacsality
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:hs6uej@gmail.com" class="social-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5l-8-5h16zm0 12H4V8l8 5l8-5v10z"/>
                         </svg>
                         hs6uej@gmail.com
@@ -569,9 +679,8 @@
         <img class="modal-content" id="modalImage">
     </div>
 
-
     <script>
-        // --- JavaScript for Theme Toggle ---
+        // --- Theme Toggle Logic ---
         const themeToggleButton = document.getElementById('theme-toggle');
         const body = document.body;
 
@@ -598,32 +707,27 @@
             setTheme(newTheme);
             localStorage.setItem('theme', newTheme);
         });
-        
-        // --- 🟢 JavaScript ที่เพิ่มเข้ามา: Image Modal ---
-        // 1. ดึง element ที่ต้องใช้มาเก็บในตัวแปร
+
+        // --- Image Modal Logic ---
         var modal = document.getElementById("imageModal");
         var img = document.getElementById("profileImage");
         var modalImg = document.getElementById("modalImage");
         var span = document.getElementsByClassName("close")[0];
 
-        // 2. เมื่อคลิกที่รูปโปรไฟล์
         img.onclick = function() {
             modal.style.display = "block";
             modalImg.src = this.src;
         }
 
-        // 3. เมื่อคลิกที่ปุ่มปิด (กากบาท)
         span.onclick = function() {
             modal.style.display = "none";
         }
-        
-        // 4. เมื่อคลิกที่พื้นที่อื่นนอก Modal
+
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-
     </script>
 </body>
 
